@@ -1,0 +1,65 @@
+[package]
+name = "webchannel"
+version = "0.1.0"
+authors = ["Greg Dallavalle <greg.dallavalle@gmail.com>"]
+edition = "2018"
+license = "MIT"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[lib]
+name = "webchannel"
+path = "src/lib.rs"
+
+[[bin]]
+name = "webchannel"
+path = "src/bin/webchannel.rs"
+test = false
+doc = false
+
+[[test]]
+name = "integration"
+path = "tests/tests.rs"
+
+[dependencies]
+anyhow = "1"
+async-trait = "0.1"
+base64 = "0.13"
+biscuit = "0.6.0-beta1"
+bytes = "1"
+chrono = "0.4"
+clap = "3.0.0-beta.2"
+config = { version = "0.11", features = ["toml"] }
+deadpool = { version = "0.8", features = ["managed"] }
+futures = "0.3"
+futures-util = "0.3"
+http-api-problem = { version = "0.50", features = ["warp"] }
+lazy_static = "1"
+mimalloc = { version = "*", default-features = false }
+mime = "0.3"
+nanoid = "0.4"
+parking_lot = "*"
+prometheus = { version = "0.12", features = ["process"] }
+redis-async = "0.11"
+serde_json = "1"
+serde = { version = "1", features = ["derive"] }
+smallvec = "*"
+thiserror = "1"
+tokio-core = "0.1"
+tokio-serde-json = "0.3"
+tokio-util = { version = "0.6", features = ["codec"] }
+tokio = { version = "1", features = ["full"] }
+tracing = "0.1"
+tracing-log = "*"
+tracing-subscriber = "0.2"
+warp = "0.3"
+
+[dev-dependencies]
+http = "*"
+reqwest = { version = "*", features = ["json", "blocking"] }
+tokio-test = "*"
+tungstenite = "0.13"
